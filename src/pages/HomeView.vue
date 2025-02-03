@@ -1,11 +1,9 @@
 <script setup>
-import { HollowDotsSpinner } from 'epic-spinners'
 import { inject } from 'vue';
 
 import HeroSlider from '../components/HeroSlider.vue'
 import CardList from '../components/CardList.vue';
 
-const state = inject('state')
 const filter = inject('filter')
 
 const preventDefault = (event) => event.preventDefault()
@@ -29,16 +27,7 @@ const preventDefault = (event) => event.preventDefault()
         </button>
         <input v-model="filter.search" type="text" name="search" placeholder="Поиск..." id="search-input">
       </form>
-      <p class="main__message _loading" v-if="state.loading">
-        <hollow-dots-spinner style="margin: 5% auto;"
-          :animation-duration="1000"
-          :dot-size="20"
-          :dots-num="3"
-          color="#8BB43C"
-        />
-      </p>
-      <p class="main__message _error" v-else-if="state.error">{{ state.error }}</p>
-			<CardList v-else class="main__shop"/>
+			<CardList class="main__shop"/>
 		</div>
 	</main>
 </template>
@@ -59,12 +48,6 @@ const preventDefault = (event) => event.preventDefault()
     font-weight: 700
   &__shop
     padding: 0 0 25px
-  &__message
-    width: 100%
-    font-family: Inter
-    font-size: 30px
-    &._error
-      color: red
 #search-form
   font-family: Inter
   display: flex
