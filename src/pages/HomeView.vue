@@ -10,7 +10,7 @@ const preventDefault = (event) => event.preventDefault()
 </script>
 
 <template>
-	<main class="main" v-auto-animate>
+	<main class="main">
     <HeroSlider />
 		<div class="main__container">
       <h2 class="main__title">Все кроссовки</h2>

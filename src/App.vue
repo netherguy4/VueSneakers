@@ -39,5 +39,5 @@ watch (filter, fetchItems)
 
 <template>
 	<AppHeader />
-	<RouterView/>
+	<RouterView />
 </template>

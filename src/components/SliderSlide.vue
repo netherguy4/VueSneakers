@@ -15,9 +15,9 @@
     margin: calc( 45/1080*100% ) calc( 60/1080*100% )
     border-radius: 20px
     background-color: #F4EFE9
-    background-image: url("/img/sponsor-logo.png"), url("/img/hero-image.webp")
+    background-image: url("/img/sponsor-logo.png"), url("/img/hero-image.jpg")
     background-repeat: no-repeat, no-repeat
-    background-position: 20px 10px, top right
+    background-position: 20px 10px, 102% top
     background-size: auto percent(40, 300), contain
     position: relative
   &__title
