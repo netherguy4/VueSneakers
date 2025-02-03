@@ -18,7 +18,7 @@ const state = inject('state')
       />
     </p>
     <p class="card-list__message _error" v-else-if="state.error">{{ state.error }}</p>
-    <CardItem class="card-list__item" v-for="item in items" :key="item.id" :title="item.title" :price="item.price" :image-url="item.imageUrl"/>
+    <CardItem class="card-list__item" v-for="item in items" :key="item.id" :id="item.id" :title="item.title" :price="item.price" :image-url="item.imageUrl"/>
   </div>
 </template>
 
