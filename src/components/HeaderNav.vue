@@ -8,7 +8,7 @@
 				<router-link to="/favorites" class="nav__element-button"><img src="/img/heart.svg" alt="" /><span class="nav__element-span">Закладки</span></router-link>
 			</li>
 			<li class="nav__element">
-				<button class="nav__element-button"><img src="/img/profile.svg" alt="" /><span class="nav__element-span">Профиль</span></button>
+				<router-link to="/orders" class="nav__element-button"><img src="/img/profile.svg" alt="" /><span class="nav__element-span">Профиль</span></router-link>
 			</li>
 		</ul>
 	</nav>

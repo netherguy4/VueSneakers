@@ -3,7 +3,11 @@ import { HollowDotsSpinner } from 'epic-spinners'
 import { inject } from 'vue';
 import CardItem from './CardItem.vue'
 
-const items = inject('items')
+const props = defineProps({
+  cards: String,
+})
+
+const items = inject(`${props.cards}`)
 const state = inject('state')
 </script>
 
@@ -26,16 +30,17 @@ const state = inject('state')
 .card-list
   width: 100%
   display: grid
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr))
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr))
   grid-auto-rows: 1fr
   gap: 40px
   &__item
-    margin: 0 auto
+    // margin: 0 auto
     max-width: 270px
   &__message
     width: 100%
     font-family: Inter
     font-size: 30px
+    grid-column: span 4
     &._error
       color: red
 </style>

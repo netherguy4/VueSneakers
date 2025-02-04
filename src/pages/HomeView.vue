@@ -27,7 +27,7 @@ const preventDefault = (event) => event.preventDefault()
         </button>
         <input v-model="filter.search" type="text" name="search" placeholder="Поиск..." id="search-input">
       </form>
-			<CardList class="main__shop"/>
+			<CardList cards="items" class="main__shop"/>
 		</div>
 	</main>
 </template>
@@ -40,7 +40,7 @@ const preventDefault = (event) => event.preventDefault()
     justify-content: space-between
     flex-wrap: wrap
     align-items: center
-    gap: 35px
+    gap: calc( 40/1080*100vw )
   &__title
     color: #000
     font-family: Inter

@@ -3,23 +3,23 @@ import CardList from '../components/CardList.vue'
 </script>
 
 <template>
-  <section class="favorites">
-    <div class="favorites__container">
-      <h2 class="favorites__title">
-        <router-link to="/" class="favorites__back-button">
+  <section class="orders">
+    <div class="orders__container">
+      <h2 class="orders__title">
+        <router-link to="/" class="orders__back-button">
           <svg class="_absolute" xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35" fill="none">
             <path d="M19 22L14 17L19 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </router-link>
-        Мои закладки
+        Мои покупки
       </h2>
-      <CardList class="favorites__cards" cards="favorites"/>
+      <CardList class="orders__cards" cards="orders"/>
     </div>
   </section>
 </template>
 
 <style lang="sass" scoped>
-.favorites
+.orders
   &__container
     padding: calc( 45/1080*100% ) calc( 60/1080*100% )
     display: flex

@@ -1,20 +1,37 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, inject } from 'vue'
 
 const props = defineProps({
   id: Number,
   title: String,
   price: Number,
   imageUrl: String,
-  isLiked: Boolean,
-  isAdded: Boolean,
 })
-
-const liked = ref(props.isLiked)
+const likedIds = inject('likedIds')
+const favorites = inject('favorites')
 const added = ref(props.isAdded)
 
+const isLiked = computed(()=>{
+  if (likedIds.value.has(props.id)) {return true} else {return false} 
+})
+
+const onClickFavoriteHandler = (e) => {
+  e.preventDefault()
+  if (!isLiked.value) {
+    const item = ref(props)
+    if (item.value){
+      favorites.value.push(item.value)
+    }
+  } else if (isLiked.value){
+    const index = favorites.value.findIndex(n => n.id === props.id);
+    if (index !== -1) {
+      favorites.value.splice(index, 1);
+    }
+  } else console.lor('error while adding to vavorites')
+}
+
 function numberWithSpaces(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 </script>
 
@@ -22,8 +39,8 @@ function numberWithSpaces(x) {
   <div class="item">
     <div class="item__container">
       <button class="item__add-button _absolute" @click="added=!added"></button>
-      <label :class="(liked)?'like-wrapper _checked':'like-wrapper'">
-        <input type="checkbox" v-model="liked" name="liked" class="like _absolute">
+      <label :class="(isLiked)?'like-wrapper _checked':'like-wrapper'">
+        <input type="checkbox" v-model="isLiked" @click="onClickFavoriteHandler" name="liked" class="like _absolute">
       </label>
       <div class="item__image">
         <img class="item__image-img" :src="'/img' + imageUrl" :alt="title">
