@@ -1,8 +1,11 @@
 <script setup>
 import { onMounted, ref, reactive, watch, provide, computed} from 'vue'
 import axios from 'axios'
-import AppHeader from './components/AppHeader.vue'
 
+import AppHeader from './components/AppHeader.vue'
+import AppDrawer from './components/AppDrawer.vue'
+
+const drawerOpened = ref(false)
 const items = ref([])
 const favorites = ref([])
 const state = reactive({
@@ -22,6 +25,7 @@ provide('filter', filter)
 provide('favorites', favorites)
 provide('items', items)
 provide('state', state)
+provide('drawerOpened', drawerOpened)
 
 const fetchItems = async ()=>{
   let loading
@@ -64,13 +68,31 @@ watch (filter, fetchItems)
 </script>
 
 <template>
+  <Transition name="fade">
+    <div v-if="drawerOpened" @click="drawerOpened=false" id="fullscreen-block"></div>
+  </Transition>
+  <Transition
+  enter-active-class="animate__animated animate__fadeInRight"
+  leave-active-class="animate__animated animate__fadeOutRight">
+    <AppDrawer v-if="drawerOpened" />
+  </Transition>
 	<div id="wrapper">
     <AppHeader />
     <RouterView />
   </div>
 </template>
 
-<style lang="sass" scoped>
+<style lang="sass">
+@use 'animate.css'
+#fullscreen-block
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background: rgba(0, 0, 0, 0.5)
+  z-index: 20
+  transition: $tr-time
 #wrapper
   background: #fff
   display: flex
@@ -78,4 +100,10 @@ watch (filter, fetchItems)
   min-height: calc(100vh - (85 / 1250 * 100vw))
   border-radius: 20px 20px 0 0
   box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.04)
+.fade-enter-active,
+.fade-leave-active
+  transition: opacity 0.5s ease
+.fade-enter-from,
+.fade-leave-to
+  opacity: 0
 </style>
