@@ -75,6 +75,7 @@ const fetchFavorites = async ()=>{
 onMounted(fetchItems)
 onMounted(fetchFavorites)
 watch (filter, fetchItems)
+watch (drawerOpened, () => {document.body.style.overflow = drawerOpened.value ? "hidden" : "auto"})
 </script>
 
 <template>
