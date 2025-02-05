@@ -1,9 +1,15 @@
 <script setup>
 import { inject } from 'vue';
+import { TransitionPresets, useTransition } from '@vueuse/core'
 
 import CartList from './CartList.vue';
 
 const drawerOpened =  inject('drawerOpened') 
+const summ = inject('summ')
+const summAnimated = useTransition(summ, {
+  duration: 300,
+  transition: TransitionPresets.easeInOutCubic,
+})
 </script>
 
 <template>
@@ -21,12 +27,12 @@ const drawerOpened =  inject('drawerOpened')
       <p class="drawer__summ summ">
         <span class="summ__position">Итого:</span>
         <span class="summ__divider"></span>
-        <span class="summ__price">21 498 грн.</span>
+        <span class="summ__price">{{ parseInt(summAnimated) }} грн.</span>
       </p>
       <p class="drawer__summ summ">
         <span class="summ__position">Налог 5%:</span>
         <span class="summ__divider"></span>
-        <span class="summ__price">1074 грн</span>
+        <span class="summ__price">{{ parseInt(summAnimated*0.05) }} грн</span>
       </p>
       <button class="drawer__order-button">
         Оформить заказ 
@@ -94,6 +100,7 @@ const drawerOpened =  inject('drawerOpened')
     font-size: 16px
     font-weight: 600
     transition: $tr-time
+    flex-shrink: 0
     @include hover
       box-shadow: 0 0 5px #9DD458
     &:disabled,&:active

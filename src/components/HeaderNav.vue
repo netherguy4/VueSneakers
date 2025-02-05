@@ -1,14 +1,20 @@
 <script setup>
 import { inject } from 'vue';
+import { TransitionPresets, useTransition } from '@vueuse/core'
+
 const drawerOpened = inject('drawerOpened')
 const summ = inject('summ')
+const summAnimated = useTransition(summ, {
+  duration: 300,
+  transition: TransitionPresets.easeInOutCubic,
+})
 </script>
 
 <template>
 	<nav class="nav">
 		<ul class="nav__list">
 			<li class="nav__element">
-				<button @click="drawerOpened = true" class="nav__element-button"><img src="/img/cart.svg" alt="" /><span class="nav__element-span">{{summ}} грн.</span></button>
+				<button @click="drawerOpened = true" class="nav__element-button"><img src="/img/cart.svg" alt="" /><span class="nav__element-span">{{parseInt(summAnimated)}} грн.</span></button>
 			</li>
 			<li class="nav__element">
 				<router-link to="/favorites" class="nav__element-button"><img src="/img/heart.svg" alt="" /><span class="nav__element-span">Закладки</span></router-link>
