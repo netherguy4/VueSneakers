@@ -12,18 +12,18 @@ const state = inject('state')
 </script>
 
 <template>
-  <div class="card-list" v-auto-animate>
-    <p class="card-list__message _loading" v-if="state.loading">
+  <ul class="card-list" v-auto-animate>
+    <li class="card-list__message _loading" v-if="state.loading">
       <hollow-dots-spinner style="margin: 5% auto;"
         :animation-duration="1000"
         :dot-size="20"
         :dots-num="3"
         color="#8BB43C"
       />
-    </p>
-    <p class="card-list__message _error" v-else-if="state.error">{{ state.error }}</p>
+    </li>
+    <li class="card-list__message _error" v-else-if="state.error">{{ state.error }}</li>
     <CardItem class="card-list__item" v-for="item in items" :key="item.id" :id="item.id" :title="item.title" :price="item.price" :image-url="item.imageUrl"/>
-  </div>
+  </ul>
 </template>
 
 <style lang="sass" scoped>

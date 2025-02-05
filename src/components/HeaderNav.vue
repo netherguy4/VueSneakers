@@ -7,7 +7,7 @@ import { inject } from 'vue';
 	<nav class="nav">
 		<ul class="nav__list">
 			<li class="nav__element">
-				<button @click="console.log(drawerOpened = true)" class="nav__element-button"><img src="/img/cart.svg" alt="" /><span class="nav__element-span">1205 руб.</span></button>
+				<button @click="console.log(drawerOpened = true)" class="nav__element-button"><img src="/img/cart.svg" alt="" /><span class="nav__element-span">1205 грн.</span></button>
 			</li>
 			<li class="nav__element">
 				<router-link to="/favorites" class="nav__element-button"><img src="/img/heart.svg" alt="" /><span class="nav__element-span">Закладки</span></router-link>

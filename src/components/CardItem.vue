@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, inject } from 'vue'
+import axios from 'axios'
 
 const props = defineProps({
   id: Number,
@@ -15,19 +16,33 @@ const isLiked = computed(()=>{
   if (likedIds.value.has(props.id)) {return true} else {return false} 
 })
 
-const onClickFavoriteHandler = (e) => {
+const onClickFavoriteHandler = async (e) => {
   e.preventDefault()
   if (!isLiked.value) {
     const item = ref(props)
     if (item.value){
-      favorites.value.push(item.value)
+      try{
+        const obj = {item_id: item.value.id}
+        favorites.value.push(item.value)
+        const {data} = await axios.post('https://9b4770c990fe3bae.mokky.dev/favorites', obj)
+        // item.value.fav_id = data.id
+        // console.log(favorites.value)
+      }
+      catch(err){
+        console.log(err)
+      }
     }
   } else if (isLiked.value){
     const index = favorites.value.findIndex(n => n.id === props.id);
     if (index !== -1) {
-      favorites.value.splice(index, 1);
+      try{
+        favorites.value.splice(index, 1);
+        // await axios.delete(`https://9b4770c990fe3bae.mokky.dev/favorites/${index}`)
+      } catch (err){
+        console.log(err)
+      }
     }
-  } else console.lor('error while adding to vavorites')
+  } else console.lor('Error while adding to favorites')
 }
 
 function numberWithSpaces(x) {
@@ -36,7 +51,7 @@ function numberWithSpaces(x) {
 </script>
 
 <template>
-  <div class="item">
+  <li class="item">
     <div class="item__container">
       <button class="item__add-button _absolute" @click="added=!added"></button>
       <label :class="(isLiked)?'like-wrapper _checked':'like-wrapper'">
@@ -47,13 +62,13 @@ function numberWithSpaces(x) {
       </div>
       <div class="item__title">{{title}}</div>
       <div class="item__price">
-        {{numberWithSpaces(price)}} руб.
+        {{numberWithSpaces(price)}} грн.
         <label :class="(added)? 'buy-wrapper _active':'buy-wrapper'">
           <input type="checkbox" class="buy _absolute" v-model="added">
         </label>
       </div>
     </div>
-  </div>
+  </li>
 </template>
 
 <style lang="sass" scoped>
@@ -68,7 +83,7 @@ function numberWithSpaces(x) {
     height: 100%
     gap: 14px
     transition: cubic-bezier(0.68, -0.55, 0.265, 1.55) $tr-time
-    &:hover
+    @include hover
       border: 1px solid #F8F8F8
       box-shadow: 0px 14px 30px 0px rgba(0, 0, 0, 0.05)
       translate: 0 -10px
@@ -124,7 +139,7 @@ function numberWithSpaces(x) {
     height: 32px
     width: 32px
     transition: background-color $tr-time, outline $tr-time
-    &:hover
+    @include hover
       outline: 1px solid rgba(0, 0, 0, 0.25)
     &::after
       content: ''

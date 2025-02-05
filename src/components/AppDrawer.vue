@@ -1,7 +1,10 @@
 <script setup>
 import { inject } from 'vue';
 
+import CartList from './CartList.vue';
+
 const drawerOpened =  inject('drawerOpened') 
+
 </script>
 
 <template>
@@ -19,16 +22,16 @@ const drawerOpened =  inject('drawerOpened')
       <p class="drawer__summ summ">
         <span class="summ__position">Итого:</span>
         <span class="summ__divider"></span>
-        <span class="summ__price">21 498 руб.</span>
+        <span class="summ__price">21 498 грн.</span>
       </p>
       <p class="drawer__summ summ">
         <span class="summ__position">Налог 5%:</span>
         <span class="summ__divider"></span>
-        <span class="summ__price">1074 руб</span>
+        <span class="summ__price">1074 грн</span>
       </p>
       <button class="drawer__order-button">
         Оформить заказ 
-        <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="drawer__order-button-arrow"  width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1 7H14.7143" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M8.71436 1L14.7144 7L8.71436 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -48,6 +51,7 @@ const drawerOpened =  inject('drawerOpened')
     width: 385px
     height: 100%
     background: #fff
+    box-shadow: -10px 4px 24px 0px rgba(0, 0, 0, 0.10)
     position: relative
     padding: 30px
     display: flex
@@ -82,6 +86,7 @@ const drawerOpened =  inject('drawerOpened')
     border-radius: 18px
     background: #9DD458
     height: 55px
+    position: relative
     display: flex
     align-items: center
     justify-content: center
@@ -90,12 +95,18 @@ const drawerOpened =  inject('drawerOpened')
     font-size: 16px
     font-weight: 600
     transition: $tr-time
-    &:hover
+    @include hover
       box-shadow: 0 0 5px #9DD458
     &:disabled,&:active
       background: gray
-      cursor: default
       box-shadow: none
+    &:disabled
+      cursor: default
+    &-arrow
+      position: absolute
+      top: 50%
+      right: 0
+      translate: -200% -50%
 .summ
   color: #000
   font-family: Inter

@@ -8,6 +8,7 @@ import AppDrawer from './components/AppDrawer.vue'
 const drawerOpened = ref(false)
 const items = ref([])
 const favorites = ref([])
+const cart = ref([])
 const state = reactive({
   loading: null,
   error: null,
@@ -23,6 +24,7 @@ const likedIds = computed(()=>{
 provide('likedIds', likedIds)
 provide('filter', filter)
 provide('favorites', favorites)
+provide('cart', cart)
 provide('items', items)
 provide('state', state)
 provide('drawerOpened', drawerOpened)
@@ -72,8 +74,8 @@ watch (filter, fetchItems)
     <div v-if="drawerOpened" @click="drawerOpened=false" id="fullscreen-block"></div>
   </Transition>
   <Transition
-  enter-active-class="animate__animated animate__fadeInRight"
-  leave-active-class="animate__animated animate__fadeOutRight">
+    enter-active-class="animate__animated animate__fadeInRight"
+    leave-active-class="animate__animated animate__fadeOutRight">
     <AppDrawer v-if="drawerOpened" />
   </Transition>
 	<div id="wrapper">
