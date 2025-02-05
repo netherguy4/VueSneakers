@@ -1,13 +1,14 @@
 <script setup>
 import { inject } from 'vue';
-  const drawerOpened = inject('drawerOpened')
+const drawerOpened = inject('drawerOpened')
+const summ = inject('summ')
 </script>
 
 <template>
 	<nav class="nav">
 		<ul class="nav__list">
 			<li class="nav__element">
-				<button @click="console.log(drawerOpened = true)" class="nav__element-button"><img src="/img/cart.svg" alt="" /><span class="nav__element-span">1205 грн.</span></button>
+				<button @click="drawerOpened = true" class="nav__element-button"><img src="/img/cart.svg" alt="" /><span class="nav__element-span">{{summ}} грн.</span></button>
 			</li>
 			<li class="nav__element">
 				<router-link to="/favorites" class="nav__element-button"><img src="/img/heart.svg" alt="" /><span class="nav__element-span">Закладки</span></router-link>

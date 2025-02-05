@@ -9,24 +9,34 @@ const props = defineProps({
   imageUrl: String,
 })
 const likedIds = inject('likedIds')
+const cartIds = inject('cartIds')
 const favorites = inject('favorites')
-const added = ref(props.isAdded)
+const cart = inject('cart')
 
 const isLiked = computed(()=>{
   if (likedIds.value.has(props.id)) {return true} else {return false} 
 })
 
+const isAdded = computed(()=>{
+  if (cartIds.value.has(props.id)) {return true} else {return false} 
+})
+
 const onClickFavoriteHandler = async (e) => {
   e.preventDefault()
   if (!isLiked.value) {
-    const item = ref(props)
+    let fav_id = favorites.value.length-1 !== -1 ? favorites.value[favorites.value.length-1].fav_id+1 : 1
+    const item = ref({
+      fav_id: fav_id,
+      id: props.id,
+      title: props.title,
+      price: props.price,
+      imageUrl: props.imageUrl
+    })
     if (item.value){
       try{
         const obj = {item_id: item.value.id}
         favorites.value.push(item.value)
-        const {data} = await axios.post('https://9b4770c990fe3bae.mokky.dev/favorites', obj)
-        // item.value.fav_id = data.id
-        // console.log(favorites.value)
+        await axios.post('https://9b4770c990fe3bae.mokky.dev/favorites', obj)
       }
       catch(err){
         console.log(err)
@@ -36,13 +46,38 @@ const onClickFavoriteHandler = async (e) => {
     const index = favorites.value.findIndex(n => n.id === props.id);
     if (index !== -1) {
       try{
+        let fav_id = favorites.value[index].fav_id
         favorites.value.splice(index, 1);
-        // await axios.delete(`https://9b4770c990fe3bae.mokky.dev/favorites/${index}`)
+        await axios.delete(`https://9b4770c990fe3bae.mokky.dev/favorites/${fav_id}`)
       } catch (err){
         console.log(err)
       }
     }
-  } else console.lor('Error while adding to favorites')
+  } else console.log('Error while adding to favorites')
+}
+
+const onClickCartHandler = (e) => {
+  e.preventDefault()
+  if (!isAdded.value) {
+    const item = ref(props)
+    if (item.value){
+      try{
+        cart.value.push(item.value)
+      }
+      catch(err){
+        console.log(err)
+      }
+    }
+  } else if (isAdded.value){
+    const index = cart.value.findIndex(n => n.id === props.id);
+    if (index !== -1) {
+      try{
+        cart.value.splice(index, 1);
+      } catch (err){
+        console.log(err)
+      }
+    }
+  } else console.log('Error while adding to cart')
 }
 
 function numberWithSpaces(x) {
@@ -53,7 +88,7 @@ function numberWithSpaces(x) {
 <template>
   <li class="item">
     <div class="item__container">
-      <button class="item__add-button _absolute" @click="added=!added"></button>
+      <button class="item__add-button _absolute" @click="onClickCartHandler"></button>
       <label :class="(isLiked)?'like-wrapper _checked':'like-wrapper'">
         <input type="checkbox" v-model="isLiked" @click="onClickFavoriteHandler" name="liked" class="like _absolute">
       </label>
@@ -63,8 +98,8 @@ function numberWithSpaces(x) {
       <div class="item__title">{{title}}</div>
       <div class="item__price">
         {{numberWithSpaces(price)}} грн.
-        <label :class="(added)? 'buy-wrapper _active':'buy-wrapper'">
-          <input type="checkbox" class="buy _absolute" v-model="added">
+        <label :class="(isAdded)? 'buy-wrapper _active':'buy-wrapper'">
+          <input type="checkbox" class="buy _absolute" v-model="isAdded" name="added">
         </label>
       </div>
     </div>

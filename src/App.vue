@@ -20,13 +20,21 @@ const filter = reactive({
 const likedIds = computed(()=>{
   return new Set(favorites.value.map(item => item.id))
 })
+const cartIds = computed(()=>{
+  return new Set(cart.value.map(item => item.id))
+})
+const summ = computed(()=>{
+  return cart.value.reduce((acc, value) => acc + value.price, 0)
+})
 
 provide('likedIds', likedIds)
+provide('cartIds', cartIds)
 provide('filter', filter)
 provide('favorites', favorites)
 provide('cart', cart)
 provide('items', items)
 provide('state', state)
+provide('summ', summ)
 provide('drawerOpened', drawerOpened)
 
 const fetchItems = async ()=>{
@@ -57,7 +65,7 @@ const fetchFavorites = async ()=>{
   try{
     const {data} = await axios.get('https://9b4770c990fe3bae.mokky.dev/favorites?_relations=items')
     favorites.value = data.map((obj) => {
-      return { ...obj.item}
+      return {fav_id: obj.id, ...obj.item}
     })
   } catch(err) {
     console.log(err)

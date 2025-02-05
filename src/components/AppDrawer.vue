@@ -4,7 +4,6 @@ import { inject } from 'vue';
 import CartList from './CartList.vue';
 
 const drawerOpened =  inject('drawerOpened') 
-
 </script>
 
 <template>
