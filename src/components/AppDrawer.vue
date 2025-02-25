@@ -141,7 +141,7 @@ watch(drawerOpened, () => {
 				v-if="(cart.length == 0) & !orderSent"
 			/>
 			<InfoBlock
-				:img-url="'/img/order-success-icon.png'"
+				:img-url="'./img/order-success-icon.png'"
 				:title="'Заказ оформлен!'"
 				:green-title="true"
 				:subtitle="`Ваш заказ #${orderNum} скоро будет передан курьерской доставке`"
