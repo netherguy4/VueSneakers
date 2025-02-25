@@ -31,7 +31,7 @@ const onClickDelete = (e) => {
 	<li class="item">
 		<div class="item__container _relative">
 			<div class="item__img-wrapper _relative">
-				<img :src="'/img' + imageUrl" :alt="title" class="item__img _absolute _contain" />
+				<img :src="'./img' + imageUrl" :alt="title" class="item__img _absolute _contain" />
 			</div>
 			<ul class="item__list">
 				<li class="item__title">{{ title }}</li>
