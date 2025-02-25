@@ -15,6 +15,11 @@ export default defineConfig({
           @use "@/assets/sass" as *
         `,
 			},
+			scss: {
+				additionalData: `
+          @use "@/assets/sass" as *;
+        `,
+			},
 		},
 	},
 	resolve: {

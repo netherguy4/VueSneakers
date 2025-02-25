@@ -18,46 +18,57 @@ import HeaderNav from './HeaderNav.vue'
 	</header>
 </template>
 
-<style scoped lang="sass">
-.header
-  border-bottom: 1px solid #EAEAEA
-  &__content
-    position: relative
-    display: flex
-    align-items: center
-    // justify-content: space-between
-    height: 130px
-    padding: 0 60px 0 45px
-    flex-wrap: wrap
-    column-gap: 50px
-  &__logo
-    display: flex
-    align-items: center
-    gap: 15px
-    position: relative
-    @media (max-width: $S)
-      position: absolute
-      top: 20px
-      left: 20px
-    &-link
-      @include absolute-link
-  &__logo-img
-    width: 40px
-    height: 40px
-  &__logo-text
-    flex-shrink: 0
-    font-family: Inter
-    @media (max-width: $S)
-      display: none
-  &__title
-    color: #000
-    font-size: 20px
-    font-weight: 700
-    text-transform: uppercase
-  &__subtitle
-    color: #9D9D9D
-    font-size: 14px
-    font-weight: 400
-  &__nav
-    margin: 0 0 0 auto
+<style scoped lang="scss">
+.header {
+	border-bottom: 1px solid #eaeaea;
+	&__content {
+		position: relative;
+		display: flex;
+		align-items: center;
+		// justify-content: space-between
+		height: 130px;
+		padding: 0 60px 0 45px;
+		flex-wrap: wrap;
+		column-gap: 50px;
+	}
+	&__logo {
+		display: flex;
+		align-items: center;
+		gap: 15px;
+		position: relative;
+		@media (max-width: $S) {
+			position: absolute;
+			top: 20px;
+			left: 20px;
+		}
+		&-link {
+			@include absolute-link;
+		}
+	}
+	&__logo-img {
+		width: 40px;
+		height: 40px;
+	}
+	&__logo-text {
+		flex-shrink: 0;
+		font-family: Inter;
+		@media (max-width: $S) {
+			display: none;
+		}
+	}
+	&__title {
+		color: #000;
+		font-size: 20px;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+	&__subtitle {
+		color: #9d9d9d;
+		font-size: 14px;
+		font-weight: 400;
+	}
+	&__nav {
+		margin: 0 0 0 auto;
+	}
+}
 </style>
