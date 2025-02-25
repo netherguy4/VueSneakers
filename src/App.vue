@@ -93,7 +93,7 @@ function preloadImages(items) {
 			imageUrls[0].map((url) => {
 				return new Promise((resolve, reject) => {
 					const img = new Image()
-					img.src = '/img' + url
+					img.src = './img' + url
 					img.onload = resolve
 					img.onerror = reject
 				})
