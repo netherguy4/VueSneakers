@@ -134,7 +134,7 @@ watch(drawerOpened, () => {
 				</svg>
 			</button>
 			<InfoBlock
-				:img-url="'/img/package-icon.png'"
+				:img-url="'./img/package-icon.png'"
 				:title="'Корзина пустая'"
 				:subtitle="'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.'"
 				class="drawer__info"

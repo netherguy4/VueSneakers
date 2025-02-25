@@ -107,7 +107,7 @@ function numberWithSpaces(x) {
 				/>
 			</label>
 			<div class="item__image">
-				<img class="item__image-img" :src="'/img' + imageUrl" :alt="title" />
+				<img class="item__image-img" :src="'./img' + imageUrl" :alt="title" />
 			</div>
 			<div class="item__title">{{ title }}</div>
 			<div class="item__price">
