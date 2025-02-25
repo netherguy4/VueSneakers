@@ -1,10 +1,10 @@
 <script setup>
-import axios from 'axios';
-import { ref, onBeforeMount, inject } from 'vue';
+import axios from 'axios'
+import { ref, onBeforeMount, inject } from 'vue'
 import { HollowDotsSpinner } from 'epic-spinners'
 
-import InfoBlock from '@/components/InfoBlock.vue';
-import OrdersList from '@/components/OrdersList.vue';
+import InfoBlock from '@/components/InfoBlock.vue'
+import OrdersList from '@/components/OrdersList.vue'
 
 const state = inject('state')
 const toast = inject('toast')
@@ -12,47 +12,75 @@ const toast = inject('toast')
 const orders = ref([])
 const showMoreOrders = ref(false)
 
-const fetchOrders = async ()=>{
-  try{
-    state.loadingOrders = true
-    const response = await axios.get('https://9b4770c990fe3bae.mokky.dev/orders?sortBy=-date')
-    orders.value = response.data
-  } catch(err) {
-    toast.error(err.message + ', can\'t load orders!')
-  } finally {
-    state.loadingOrders = false;
-  }
+const fetchOrders = async () => {
+	try {
+		state.loadingOrders = true
+		const response = await axios.get('https://9b4770c990fe3bae.mokky.dev/orders?sortBy=-date')
+		orders.value = response.data
+	} catch (err) {
+		toast.error(err.message + ", can't load orders!")
+	} finally {
+		state.loadingOrders = false
+	}
 }
 
 onBeforeMount(fetchOrders)
 </script>
 
 <template>
-  <section class="orders" v-auto-animate>
-    <div class="orders__container" v-if="orders.length > 0 || state.loadingOrders === true">
-      <h2 class="orders__title">
-        <router-link to="/" class="orders__back-button">
-          <svg class="_absolute" xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35" fill="none">
-            <path d="M19 22L14 17L19 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </router-link>
-        Мои покупки
-      </h2>
-      <div class="orders__message _loading" v-if="state.loadingOrders">
-        <hollow-dots-spinner style="margin: 5% auto 30%;"
-          :animation-duration="1000"
-          :dot-size="20"
-          :dots-num="3"
-          color="#8BB43C"
-        />
-      </div>
-      <OrdersList :orders="showMoreOrders ? orders : orders.slice(0,5)" class="orders__list" />
-    </div>
-    <InfoBlock v-else :img-url="'/img/emoji-2.png'" :img-emoji="true"  :title="'У вас нет заказов'" :subtitle="'Вы нищеброд? \n Оформите хотя бы один заказ.'" :link="true" class="orders__info" />
-    <Transition>
-      <button v-show="!showMoreOrders & orders.length > 5" @click="showMoreOrders = true" class="orders__show-more-button">Показать все</button>
-    </Transition>
-  </section>
+	<section class="orders" v-auto-animate>
+		<div class="orders__container" v-if="orders.length > 0 || state.loadingOrders === true">
+			<h2 class="orders__title">
+				<router-link to="/" class="orders__back-button">
+					<svg
+						class="_absolute"
+						xmlns="http://www.w3.org/2000/svg"
+						width="35"
+						height="35"
+						viewBox="0 0 35 35"
+						fill="none"
+					>
+						<path
+							d="M19 22L14 17L19 12"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>
+				</router-link>
+				Мои покупки
+			</h2>
+			<div class="orders__message _loading" v-if="state.loadingOrders">
+				<hollow-dots-spinner
+					style="margin: 5% auto 30%"
+					:animation-duration="1000"
+					:dot-size="20"
+					:dots-num="3"
+					color="#8BB43C"
+				/>
+			</div>
+			<OrdersList :orders="showMoreOrders ? orders : orders.slice(0, 5)" class="orders__list" />
+		</div>
+		<InfoBlock
+			v-else
+			:img-url="'./img/emoji-2.png'"
+			:img-emoji="true"
+			:title="'У вас нет заказов'"
+			:subtitle="'Вы нищеброд? \n Оформите хотя бы один заказ.'"
+			:link="true"
+			class="orders__info"
+		/>
+		<Transition>
+			<button
+				v-show="!showMoreOrders & (orders.length > 5)"
+				@click="showMoreOrders = true"
+				class="orders__show-more-button"
+			>
+				Показать все
+			</button>
+		</Transition>
+	</section>
 </template>
 
 <style lang="sass" scoped>

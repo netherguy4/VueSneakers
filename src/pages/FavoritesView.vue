@@ -1,26 +1,47 @@
 <script setup>
-import { inject } from 'vue';
+import { inject } from 'vue'
 import CardList from '../components/CardList.vue'
-import InfoBlock from '@/components/InfoBlock.vue';
+import InfoBlock from '@/components/InfoBlock.vue'
 
-const favorites = inject('favorites') 
+const favorites = inject('favorites')
 </script>
 
 <template>
-  <section class="favorites" v-auto-animate>
-    <div v-if="favorites.length > 0" class="favorites__container">
-      <h2 class="favorites__title">
-        <router-link to="/" class="favorites__back-button">
-          <svg class="_absolute" xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35" fill="none">
-            <path d="M19 22L14 17L19 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </router-link>
-        Мои закладки
-      </h2>
-      <CardList class="favorites__cards" cards="favorites"/>
-    </div>
-    <InfoBlock v-else :img-url="'/img/emoji-1.png'" :img-emoji="true"  :title="'Закладок нет :('" :subtitle="'Вы ничего не добавляли в закладки'" :link="true" class="favorites__info" />
-  </section>
+	<section class="favorites" v-auto-animate>
+		<div v-if="favorites.length > 0" class="favorites__container">
+			<h2 class="favorites__title">
+				<router-link to="/" class="favorites__back-button">
+					<svg
+						class="_absolute"
+						xmlns="http://www.w3.org/2000/svg"
+						width="35"
+						height="35"
+						viewBox="0 0 35 35"
+						fill="none"
+					>
+						<path
+							d="M19 22L14 17L19 12"
+							stroke="currentColor"
+							stroke-width="1.5"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>
+				</router-link>
+				Мои закладки
+			</h2>
+			<CardList class="favorites__cards" cards="favorites" />
+		</div>
+		<InfoBlock
+			v-else
+			:img-url="'./img/emoji-1.png'"
+			:img-emoji="true"
+			:title="'Закладок нет :('"
+			:subtitle="'Вы ничего не добавляли в закладки'"
+			:link="true"
+			class="favorites__info"
+		/>
+	</section>
 </template>
 
 <style lang="sass" scoped>
