@@ -17,7 +17,7 @@ const routes = [
 	{ path: '/orders', name: 'Orders', component: Orders },
 ]
 const router = createRouter({
-	history: createWebHistory(),
+	history: createWebHistory('/VueSneakers/'),
 	routes,
 })
 
