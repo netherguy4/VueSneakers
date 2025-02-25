@@ -13,7 +13,7 @@ const cart = inject('cart')
 			:id="item.id"
 			:title="item.title"
 			:price="item.price"
-			:image-url="'.' + item.imageUrl"
+			:image-url="item.imageUrl"
 		/>
 	</ul>
 </template>
