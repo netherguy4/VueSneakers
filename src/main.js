@@ -1,7 +1,7 @@
 import './assets/nullstyle.css'
 
 import { createApp } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 import Toast from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
@@ -17,7 +17,7 @@ const routes = [
 	{ path: '/orders', name: 'Orders', component: Orders },
 ]
 const router = createRouter({
-	history: createWebHistory('/VueSneakers/'),
+	history: createWebHashHistory('/VueSneakers/'),
 	routes,
 })
 
