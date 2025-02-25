@@ -11,7 +11,7 @@ const props = defineProps({
 	<li class="item">
 		<div class="item__container">
 			<div class="item__image-wrapper _relative">
-				<img :src="'/img' + props.imageUrl" class="item__image _absolute _contain" />
+				<img :src="'./img' + props.imageUrl" class="item__image _absolute _contain" />
 			</div>
 			<div class="item__caption">
 				<div class="item__title">{{ title }}</div>
